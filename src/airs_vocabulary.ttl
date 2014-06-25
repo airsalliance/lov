@@ -1,16 +1,16 @@
-# baseURI: http://airs.org/vocabulary_0.0.6
-# imports: http://purl.org/dc/elements/1.1/
+# baseURI: http://airs.org/vocabulary_0.0.7#
+# imports: http://purl.org/dc/elements/1.1#
 # imports: http://rdf.muninn-project.org/ontologies/appearances#
 # imports: http://www.semanticdesktop.org/ontologies/2007/04/02/ncal#
-# imports: http://www.w3.org/2006/vcard/ns
-# imports: http://www.w3.org/ns/org
+# imports: http://www.w3.org/2006/vcard/ns#
+# imports: http://www.w3.org/ns/org#
 
 @prefix : <http://www.semanticweb.org/owl/owlapi/turtle#> .
-@prefix airs: <http://airs.org/vocabulary_0.0.6#> .
+@prefix airs: <http://airs.org/vocabulary_0.0.7#> .
 @prefix appearances: <http://rdf.muninn-project.org/ontologies/appearances#> .
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix dcam: <http://purl.org/dc/dcam/> .
-@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dc: <http://purl.org/dc/elements/1.1#> .
+@prefix dcam: <http://purl.org/dc/dcam#> .
+@prefix dct: <http://purl.org/dc/terms#> .
 @prefix ncal: <http://www.semanticdesktop.org/ontologies/2007/04/02/ncal#> .
 @prefix nrl: <http://www.semanticdesktop.org/ontologies/2007/08/15/nrl#> .
 @prefix ogc: <http://www.opengis.net/rdf#> .
@@ -20,22 +20,22 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
-@prefix xhtm: <http://www.w3.org/1999/xhtml> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xhtm: <http://www.w3.org/1999/xhtml#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <appearances:GenderStrict>
   rdf:type owl:Class ;
 .
-<http://airs.org/vocabulary_0.0.6>
+airs:
   rdf:type owl:Ontology ;
   owl:imports dc: ;
   owl:imports appearances: ;
   owl:imports ncal: ;
-  owl:imports <http://www.w3.org/2006/vcard/ns> ;
-  owl:imports <http://www.w3.org/ns/org> ;
-  owl:priorVersion <http://airs.org/vocabulary_0.0.5> ;
-  owl:versionIRI <http://airs.org/vocabulary_0.0.6> ;
+  owl:imports vcard: ;
+  owl:imports org: ;
+  owl:priorVersion <http://airs.org/vocabulary_0.0.6#> ;
+  owl:versionIRI airs: ;
 .
 airs:Address
   rdf:type owl:Class ;
@@ -444,6 +444,39 @@ airs:ResourceInfo
       owl:onProperty dct:created ;
     ] ;
 .
+airs:ResourceInfo_1
+  rdf:type airs:ResourceInfo ;
+  airs:attributesResourceSpecialist "Donald Truman"^^xsd:string ;
+  airs:hasDateLastVerified "2014-06-03T18:13:51.0Z"^^xsd:dateTime ;
+  airs:hasDateOfLastAction "2014-06-07T00:00:00.0Z"^^xsd:dateTime ;
+  airs:hasLastActionType "updated ZIP Code"^^xsd:string ;
+  airs:isAvailableForDirectory "true"^^xsd:boolean ;
+  airs:isAvailableForReferral "true"^^xsd:boolean ;
+  airs:isAvailableForResearch "true"^^xsd:boolean ;
+  dct:created "2014-06-01T00:00:00.0Z"^^xsd:dateTime ;
+.
+airs:ResourceInfo_2
+  rdf:type airs:ResourceInfo ;
+  airs:attributesResourceSpecialist "Angie Capers"^^xsd:string ;
+  airs:hasDateLastVerified "2014-06-03T18:13:51.0Z"^^xsd:dateTime ;
+  airs:hasDateOfLastAction "2014-06-07T00:00:00.0Z"^^xsd:dateTime ;
+  airs:hasLastActionType "updated ZIP Code"^^xsd:string ;
+  airs:isAvailableForDirectory "true"^^xsd:boolean ;
+  airs:isAvailableForReferral "true"^^xsd:boolean ;
+  airs:isAvailableForResearch "true"^^xsd:boolean ;
+  dct:created "2014-06-01T00:00:00.0Z"^^xsd:dateTime ;
+.
+airs:ResourceInfo_3
+  rdf:type airs:ResourceInfo ;
+  airs:attributesResourceSpecialist "Billy Bigglesworth"^^xsd:string ;
+  airs:hasDateLastVerified "2014-06-03T18:13:51.0Z"^^xsd:dateTime ;
+  airs:hasDateOfLastAction "2014-06-07T00:00:00.0Z"^^xsd:dateTime ;
+  airs:hasLastActionType "updated ZIP Code"^^xsd:string ;
+  airs:isAvailableForDirectory "true"^^xsd:boolean ;
+  airs:isAvailableForReferral "true"^^xsd:boolean ;
+  airs:isAvailableForResearch "true"^^xsd:boolean ;
+  dct:created "2014-06-01T00:00:00.0Z"^^xsd:dateTime ;
+.
 airs:Seasonal
   rdf:type owl:Class ;
   rdfs:comment "Activities that are only offered a certain time of year, such as seasonal tax preparation, summer camps and holiday meals."@en ;
@@ -525,6 +558,11 @@ airs:ServiceArea
       owl:onProperty dct:description ;
     ] ;
 .
+airs:ServiceArea_1
+  rdf:type airs:ServiceArea ;
+  airs:isInCensusTrack "12345"^^xsd:string ;
+  airs:servesGeographicArea :Location_1 ;
+.
 airs:ServiceGroup
   rdf:type owl:Class ;
   rdfs:comment "Groups together multiple Services that are related somehow."@en ;
@@ -549,6 +587,9 @@ airs:ServiceGroup
       owl:allValuesFrom xsd:string ;
       owl:onProperty dct:title ;
     ] ;
+.
+airs:ServiceGroup_1
+  rdf:type airs:ServiceGroup ;
 .
 airs:Service_1
   rdf:type airs:Service ;
@@ -1282,17 +1323,17 @@ dc:type
   rdfs:label "Type"@en ;
   skos:note "A second property with the same name as this property has been declared in the dcterms: namespace (http://purl.org/dc/terms/).  See the Introduction to the document \"DCMI Metadata Terms\" (http://dublincore.org/documents/dcmi-terms/) for an explanation."@en ;
 .
-<http://purl.org/dc/terms#:description>
-  rdf:type owl:Class ;
-.
-<http://purl.org/dc/terms#:identifier>
-  rdf:type owl:Class ;
-.
 dct:
   rdf:type owl:NamedIndividual ;
   dct:modified "2012-06-14"^^xsd:date ;
   dct:publisher <http://purl.org/dc/aboutdcmi#DCMI> ;
   dct:title "DCMI Metadata Terms - other"@en ;
+.
+<http://purl.org/dc/terms#:description>
+  rdf:type owl:Class ;
+.
+<http://purl.org/dc/terms#:identifier>
+  rdf:type owl:Class ;
 .
 dct:Agent
   rdf:type dct:AgentClass ;
@@ -1483,9 +1524,6 @@ dct:Location
   rdfs:label "Location"@en ;
   rdfs:subClassOf dct:LocationPeriodOrJurisdiction ;
 .
-<http://purl.org/dc/terms/Location:title>
-  rdf:type owl:Class ;
-.
 dct:LocationPeriodOrJurisdiction
   rdf:type owl:Class ;
   rdf:type owl:NamedIndividual ;
@@ -1494,6 +1532,9 @@ dct:LocationPeriodOrJurisdiction
   rdfs:comment "A location, period of time, or jurisdiction."@en ;
   rdfs:isDefinedBy dct: ;
   rdfs:label "Location, Period, or Jurisdiction"@en ;
+.
+dct:Location_1
+  rdf:type dct:Location ;
 .
 dct:MESH
   rdf:type dcam:VocabularyEncodingScheme ;
@@ -2481,6 +2522,9 @@ dct:valid
   rdfs:subPropertyOf dc:date ;
   rdfs:subPropertyOf dct:date ;
 .
+<http://purl.org/dc/terms/Location:title>
+  rdf:type owl:Class ;
+.
 <http://purl.org/dc/terms:description>
   rdf:type owl:Class ;
 .
@@ -2494,7 +2538,7 @@ dct:valid
   rdf:type owl:Class ;
 .
 appearances:GenderStrict_1
-  rdf:type appearances:GenderStrict ;
+  rdf:type <appearances:GenderStrict> ;
 .
 <http://www.opengis.net/rdf#:Point>
   rdf:type owl:Class ;
@@ -2540,6 +2584,9 @@ provided with this ontology or create his/her own with desired semantics.
 See the documentation of ncal:class for details.""" ;
   rdfs:label "AccessClassification" ;
   rdfs:subClassOf rdfs:Resource ;
+.
+ncal:AccessClassification_1
+  rdf:type ncal:AccessClassification ;
 .
 ncal:Alarm
   rdf:type owl:Class ;
@@ -2594,11 +2641,24 @@ ncal:BydayRulePart
   rdfs:label "BydayRulePart" ;
   rdfs:subClassOf rdfs:Resource ;
 .
+ncal:BydayRulePart_1
+  rdf:type ncal:BydayRulePart ;
+  ncal:bydayWeekday :Weekday_1 ;
+.
+ncal:BydayRulePart_2
+  rdf:type ncal:BydayRulePart ;
+  ncal:bydayWeekday :Weekday_2 ;
+.
 ncal:Calendar
   rdf:type owl:Class ;
   rdfs:comment "A calendar. Inspirations for this class can be traced to the VCALENDAR component defined in RFC 2445 sec. 4.4, but it may just as well be used to represent any kind of Calendar." ;
   rdfs:label "Calendar" ;
   rdfs:subClassOf <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#InformationElement> ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom <ncal:Calendar> ;
+      owl:onProperty airs:hasLanguageTimeOpen ;
+    ] ;
 .
 ncal:CalendarDataObject
   rdf:type owl:Class ;
@@ -2726,6 +2786,18 @@ ncal:NcalDateTime
   rdfs:label "NcalDateTime" ;
   rdfs:subClassOf ncal:NcalTimeEntity ;
 .
+ncal:NcalDateTime_1
+  rdf:type ncal:NcalDateTime ;
+  ncal:date "2016-05-20"^^xsd:date ;
+  ncal:ncalTimezone :Timezone_1 ;
+.
+ncal:NcalDateTime_2
+  rdf:type ncal:NcalDateTime ;
+  ncal:date "2014-07-20"^^xsd:date ;
+.
+ncal:NcalDateTime_3
+  rdf:type ncal:NcalDateTime ;
+.
 ncal:NcalPeriod
   rdf:type owl:Class ;
   rdfs:comment "A period of time. Inspired by the PERIOD datatype specified in RFC 2445 sec. 4.3.9" ;
@@ -2756,6 +2828,9 @@ ncal:RecurrenceFrequency
   rdfs:label "RecurrenceFrequency" ;
   rdfs:subClassOf rdfs:Resource ;
 .
+ncal:RecurrenceFrequency_1
+  rdf:type ncal:RecurrenceFrequency ;
+.
 ncal:RecurrenceIdentifier
   rdf:type owl:Class ;
   rdfs:comment "Recurrence Identifier. Introduced to provide a structure for the value of ncal:recurrenceId property. See the documentation of ncal:recurrenceId for details." ;
@@ -2772,6 +2847,21 @@ ncal:RecurrenceRule
   rdf:type owl:Class ;
   rdfs:label "RecurrenceRule" ;
   rdfs:subClassOf rdfs:Resource ;
+.
+ncal:RecurrenceRule_1
+  rdf:type ncal:RecurrenceRule ;
+  ncal:byday :BydayRulePart_1 ;
+.
+ncal:RecurrenceRule_2
+  rdf:type ncal:RecurrenceRule ;
+  ncal:byday :BydayRulePart_2 ;
+  ncal:count 2 ;
+  ncal:freq :RecurrenceFrequency_1 ;
+  ncal:interval 3 ;
+.
+ncal:RecurrenceRule_3
+  rdf:type ncal:RecurrenceRule ;
+  ncal:bymonth 06 ;
 .
 ncal:RequestStatus
   rdf:type owl:Class ;
@@ -2803,6 +2893,10 @@ ncal:TimezoneObservance
   rdfs:subClassOf ncal:UnionOfTimezoneObservanceEventFreebusyJournalTimezoneTodo ;
   rdfs:subClassOf ncal:UnionOfTimezoneObservanceEventFreebusyTimezoneTodo ;
   rdfs:subClassOf ncal:UnionOfTimezoneObservanceEventJournalTimezoneTodo ;
+.
+ncal:Timezone_1
+  rdf:type ncal:Timezone ;
+  ncal:tzid "05"^^xsd:string ;
 .
 ncal:Todo
   rdf:type owl:Class ;
@@ -2912,6 +3006,12 @@ ncal:Weekday
   rdfs:comment "Day of the week. This class has been created to provide the limited vocabulary for ncal:byday property. See the documentation for ncal:byday for details." ;
   rdfs:label "Weekday" ;
   rdfs:subClassOf rdfs:Resource ;
+.
+ncal:Weekday_1
+  rdf:type ncal:Weekday ;
+.
+ncal:Weekday_2
+  rdf:type ncal:Weekday ;
 .
 ncal:_8bitEncoding
   rdf:type ncal:AttachmentEncoding ;
@@ -4058,129 +4158,14 @@ ncal:yearly
   rdf:type owl:NamedIndividual ;
   rdfs:label "yearly" ;
 .
-<http://www.semanticdesktop.org/ontologies/2007/04/02/ncal/:Calendar>
-  rdf:type owl:Class ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom <http://www.semanticdesktop.org/ontologies/2007/04/02/ncal:Calendar> ;
-      owl:onProperty airs:hasLanguageTimeOpen ;
-    ] ;
-.
-<http://www.semanticdesktop.org/ontologies/2007/04/02/ncal:Calendar>
-  rdf:type owl:Class ;
-.
 nrl:maxCardinality
   rdf:type owl:AnnotationProperty ;
-.
-:AccessClassification_1
-  rdf:type ncal:AccessClassification ;
-.
-:BydayRulePart_1
-  rdf:type ncal:BydayRulePart ;
-  ncal:bydayWeekday :Weekday_1 ;
-.
-:BydayRulePart_2
-  rdf:type ncal:BydayRulePart ;
-  ncal:bydayWeekday :Weekday_2 ;
-.
-:GenderStrict_1
-  rdf:type <appearances:GenderStrict> ;
-.
-:GenderStrict_2
-  rdf:type appearances:GenderStrict ;
-.
-:Location_1
-  rdf:type dct:Location ;
-.
-:NcalDateTime_1
-  rdf:type ncal:NcalDateTime ;
-  ncal:date "2016-05-20"^^xsd:date ;
-  ncal:ncalTimezone :Timezone_1 ;
-.
-:NcalDateTime_2
-  rdf:type ncal:NcalDateTime ;
-  ncal:date "2014-07-20"^^xsd:date ;
-.
-:NcalDateTime_3
-  rdf:type ncal:NcalDateTime ;
-.
-:RecurrenceFrequency_1
-  rdf:type ncal:RecurrenceFrequency ;
-.
-:RecurrenceRule_1
-  rdf:type ncal:RecurrenceRule ;
-  ncal:byday :BydayRulePart_1 ;
-.
-:RecurrenceRule_2
-  rdf:type ncal:RecurrenceRule ;
-  ncal:byday :BydayRulePart_2 ;
-  ncal:count 2 ;
-  ncal:freq :RecurrenceFrequency_1 ;
-  ncal:interval 3 ;
-.
-:RecurrenceRule_3
-  rdf:type ncal:RecurrenceRule ;
-  ncal:bymonth 06 ;
-.
-:ResourceInfo_1
-  rdf:type airs:ResourceInfo ;
-  airs:attributesResourceSpecialist "Donald Truman"^^xsd:string ;
-  airs:hasDateLastVerified "2014-06-03T18:13:51.0Z"^^xsd:dateTime ;
-  airs:hasDateOfLastAction "2014-06-07T00:00:00.0Z"^^xsd:dateTime ;
-  airs:hasLastActionType "updated ZIP Code"^^xsd:string ;
-  airs:isAvailableForDirectory "true"^^xsd:boolean ;
-  airs:isAvailableForReferral "true"^^xsd:boolean ;
-  airs:isAvailableForResearch "true"^^xsd:boolean ;
-  dct:created "2014-06-01T00:00:00.0Z"^^xsd:dateTime ;
-.
-:ResourceInfo_2
-  rdf:type airs:ResourceInfo ;
-  airs:attributesResourceSpecialist "Angie Capers"^^xsd:string ;
-  airs:hasDateLastVerified "2014-06-03T18:13:51.0Z"^^xsd:dateTime ;
-  airs:hasDateOfLastAction "2014-06-07T00:00:00.0Z"^^xsd:dateTime ;
-  airs:hasLastActionType "updated ZIP Code"^^xsd:string ;
-  airs:isAvailableForDirectory "true"^^xsd:boolean ;
-  airs:isAvailableForReferral "true"^^xsd:boolean ;
-  airs:isAvailableForResearch "true"^^xsd:boolean ;
-  dct:created "2014-06-01T00:00:00.0Z"^^xsd:dateTime ;
-.
-:ResourceInfo_3
-  rdf:type airs:ResourceInfo ;
-  airs:attributesResourceSpecialist "Angie Capers"^^xsd:string ;
-  airs:hasDateLastVerified "2014-06-03T18:13:51.0Z"^^xsd:dateTime ;
-  airs:hasDateOfLastAction "2014-06-07T00:00:00.0Z"^^xsd:dateTime ;
-  airs:hasLastActionType "updated ZIP Code"^^xsd:string ;
-  airs:isAvailableForDirectory "true"^^xsd:boolean ;
-  airs:isAvailableForReferral "true"^^xsd:boolean ;
-  airs:isAvailableForResearch "true"^^xsd:boolean ;
-  dct:created "2014-06-01T00:00:00.0Z"^^xsd:dateTime ;
-.
-:ServiceArea_1
-  rdf:type airs:ServiceArea ;
-  airs:isInCensusTrack "12345"^^xsd:string ;
-  airs:servesGeographicArea :Location_1 ;
-.
-:ServiceGroup_1
-  rdf:type airs:ServiceGroup ;
-.
-:Timezone_1
-  rdf:type ncal:Timezone ;
-  ncal:tzid "05"^^xsd:string ;
-.
-:Voice_1
-  rdf:type vcard:Voice ;
 .
 :Voice_1-type-vcard_Voice
   rdf:type rdf:Statement ;
   rdf:object vcard:Voice ;
   rdf:predicate rdf:type ;
   rdf:subject :Voice_1 ;
-.
-:Voice_2
-  rdf:type vcard:Voice ;
-.
-:Weekday_1
-  rdf:type ncal:Weekday ;
 .
 :Weekday_1-type-ncal_Weekday
   rdf:type rdf:Statement ;
@@ -4193,9 +4178,6 @@ nrl:maxCardinality
   rdf:object rdf:Statement ;
   rdf:predicate rdf:type ;
   rdf:subject :Weekday_1-type-ncal_Weekday ;
-.
-:Weekday_2
-  rdf:type ncal:Weekday ;
 .
 rdfs:Class
   rdf:type owl:Class ;
@@ -4215,30 +4197,30 @@ xsd:duration
 skos:note
   rdf:type owl:AnnotationProperty ;
 .
-<http://www.w3.org/2006/vcard/ns#:hasTelephone>
-  rdf:type owl:Class ;
-.
 vcard:Contact_1
   rdf:type owl:NamedIndividual ;
   rdf:type vcard:Contact ;
   rdfs:label "Bill Smith"@en ;
 .
+vcard:Voice_1
+  rdf:type vcard:Voice ;
+.
+vcard:Voice_2
+  rdf:type vcard:Voice ;
+.
+vcard:hasEmail
+  rdf:type owl:Class ;
+.
+vcard:hasTelephone
+  rdf:type owl:Class ;
+.
+vcard:hasURL
+  rdf:type owl:Class ;
+.
 vcard:url
   rdf:type owl:AnnotationProperty ;
   rdf:type owl:DatatypeProperty ;
 .
-<http://www.w3.org/2006/vcard/ns:hasEmail>
-  rdf:type owl:Class ;
-.
-<http://www.w3.org/2006/vcard/ns:hasTelephone>
-  rdf:type owl:Class ;
-.
-<http://www.w3.org/2006/vcard/ns:hasURL>
-  rdf:type owl:Class ;
-.
-<http://www.w3.org/2006/vcard/ns:hasUrl>
-  rdf:type owl:Class ;
-.
-<http://www.w3.org/ns/org:identifier>
+org:identifier
   rdf:type owl:Class ;
 .
