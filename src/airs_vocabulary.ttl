@@ -1,4 +1,4 @@
-# baseURI: http://airs.org/vocabulary_0.0.7#
+# baseURI: http://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#
 # imports: http://purl.org/dc/elements/1.1#
 # imports: http://rdf.muninn-project.org/ontologies/appearances#
 # imports: http://www.semanticdesktop.org/ontologies/2007/04/02/ncal#
@@ -6,7 +6,7 @@
 # imports: http://www.w3.org/ns/org#
 
 @prefix : <http://www.semanticweb.org/owl/owlapi/turtle#> .
-@prefix airs: <http://airs.org/vocabulary_0.0.7#> .
+@prefix airs: <http://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#> .
 @prefix appearances: <http://rdf.muninn-project.org/ontologies/appearances#> .
 @prefix dc: <http://purl.org/dc/elements/1.1#> .
 @prefix dcam: <http://purl.org/dc/dcam#> .
@@ -34,8 +34,8 @@ airs:
   owl:imports ncal: ;
   owl:imports vcard: ;
   owl:imports org: ;
-  owl:priorVersion <http://airs.org/vocabulary_0.0.6#> ;
-  owl:versionIRI airs: ;
+  owl:priorVersion <http://github.com/airs-linked-data/lov/releases/v0.0.7/src/airs_vocabulary.ttl#> ;
+  owl:versionIRI <http://github.com/airs-linked-data/lov/releases/v0.0.8/src/airs_vocabulary.ttl#> ;
 .
 airs:Address
   rdf:type owl:Class ;
