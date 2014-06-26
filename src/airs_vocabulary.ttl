@@ -1,4 +1,4 @@
-# baseURI: http://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#
+# baseURI: https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#
 # imports: http://purl.org/dc/elements/1.1#
 # imports: http://rdf.muninn-project.org/ontologies/appearances#
 # imports: http://www.semanticdesktop.org/ontologies/2007/04/02/ncal#
@@ -6,7 +6,7 @@
 # imports: http://www.w3.org/ns/org#
 
 @prefix : <http://www.semanticweb.org/owl/owlapi/turtle#> .
-@prefix airs: <http://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#> .
+@prefix airs: <https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#> .
 @prefix appearances: <http://rdf.muninn-project.org/ontologies/appearances#> .
 @prefix dc: <http://purl.org/dc/elements/1.1#> .
 @prefix dcam: <http://purl.org/dc/dcam#> .
