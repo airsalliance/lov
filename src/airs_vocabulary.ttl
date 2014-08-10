@@ -1,1145 +1,1876 @@
-# baseURI: https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#
-
 @prefix : <http://www.semanticweb.org/owl/owlapi/turtle#> .
-@prefix airs: <https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#> .
-@prefix appearances: <http://rdf.muninn-project.org/ontologies/appearances#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dct: <http://purl.org/dc/terms/> .
-@prefix ncal: <http://www.semanticdesktop.org/ontologies/2007/04/02/ncal#> .
 @prefix org: <http://www.w3.org/ns/org#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix airs: <https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#> .
+@prefix ncal: <http://www.semanticdesktop.org/ontologies/2007/04/02/ncal#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix appearances: <http://rdf.muninn-project.org/ontologies/appearances#> .
+@base <https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#> .
 
-airs:
-  rdf:type owl:Ontology ;
-  dct:description "The AIRS Linked Open Vocabulary is a way to describe human services information and referral (I&R) concepts.  AIRS is the Alliance of Information and Referral Services (airs.org), which possesses over 1,000 member agencies primarily in the United States and Canada.  The AIRS LOV is based on the AIRS XML Schema, available at: https://airs-xml.googlecode.com/hg/tags/3.1/airs.xsd"@en ;
-  dc:title "The Alliance of Information and Referral Services (AIRS) Linked Open Vocabulary"^^xsd:string ;
-  dct:date "2014-06-26"^^xsd:date ;
-  owl:priorVersion <https://raw.githubusercontent.com/airs-linked-data/lov/v0.0.8/src/airs_vocabulary.ttl#> ;
-  owl:versionIRI <https://raw.githubusercontent.com/airs-linked-data/lov/v0.0.9/src/airs_vocabulary.ttl#> ;
-.
-airs:Address
-  rdf:type owl:Class ;
-  rdfs:comment "airs:hasDescription is a description of the physical location or other information pertinent to this address, and hasExplanationForNoPhysicalAddress clarifies why the address doesn't have a physical presence."@en ;
-  rdfs:subClassOf owl:Thing ;
-  rdfs:subClassOf vcard:Address ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:boolean ;
-      owl:onProperty airs:isMailingAddress ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:boolean ;
-      owl:onProperty airs:isPhysicalAddress ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dct:description ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty airs:hasExplanationForNoPhysicalAddress ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:ResourceInfo ;
-      owl:onProperty airs:hasResourceInfo ;
-    ] ;
-.
-airs:Address_1
-  rdf:type owl:NamedIndividual ;
-  rdf:type airs:Address ;
-  dct:description "Esta es la dirección principal de esta agencia."@es ;
-  dct:description "This is the main address for this agency."@en ;
-  vcard:country-name "United States of America"@en ;
-  vcard:locality "Marietta"@en ;
-  vcard:postal-code "30008"^^xsd:string ;
-  vcard:region "Georgia"@en ;
-  vcard:street-address "331 Main Street"^^xsd:string ;
-  airs:hasResourceInfo :ResourceInfo_1 ;
-  airs:isMailingAddress "true"^^xsd:boolean ;
-  airs:isPhysicalAddress "true"^^xsd:boolean ;
-.
-airs:Agency
-  rdf:type owl:Class ;
-  rdfs:comment "Agencies are organizations that offer services at locations. Agencies provide services directly or they may have \"child\" agencies that offer these services. Services are offered at sites that belong to an agency. Services are represented by the combination of taxonomy codes offered at a location; this idea is called a SiteService. To recap: Agencies don't provide services directly, they provide them through sites. For property <http://www.w3.org/2006/vcard/ns:hasRelated> This represents the agency contact.  1) Contact is the person at an Agency, or Site who will interface with the public or who has responsibility for the entity, like a site manager or director."@en ;
-  rdfs:label "Agence"@fr ;
-  rdfs:label "Agencia"@es ;
-  rdfs:label "Agency"@en ;
-  rdfs:subClassOf org:FormalOrganization ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:boolean ;
-      owl:onProperty airs:excludesFromDirectory ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:boolean ;
-      owl:onProperty airs:excludesFromWebsite ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:gYear ;
-      owl:onProperty airs:hasYearIncorporated ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dct:description ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty vcard:organization-name ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty vcard:url ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty airs:hasFEIN ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty airs:hasLegalStatus ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty airs:hasRecordOwner ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom vcard:Contact ;
-      owl:onProperty vcard:hasRelated ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom vcard:Email ;
-      owl:onProperty vcard:hasEmail ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom vcard:TelephoneType ;
-      owl:onProperty vcard:hasTelephone ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:AlternateName ;
-      owl:onProperty airs:hasAlternateName ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:InternetResource ;
-      owl:onProperty airs:hasInternetResource ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:LicenseAccreditation ;
-      owl:onProperty airs:hasLicenseAccreditation ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:ResourceInfo ;
-      owl:onProperty airs:hasResourceInfo ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:Service ;
-      owl:onProperty airs:offersService ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:ServiceGroup ;
-      owl:onProperty airs:hasServiceGroup ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty airs:hasStatus ;
-    ] ;
-.
-airs:Agency_1
-  rdf:type owl:NamedIndividual ;
-  rdf:type airs:Agency ;
-  dct:description "The community clinic provides basic health care for members of the community."@en ;
-  vcard:hasRelated vcard:Contact_1 ;
-  vcard:hasTelephone :Voice_1 ;
-  vcard:organization-name "The Community Clinic"@en ;
-  vcard:url "http://community_clinic.com"^^xsd:string ;
-  org:hasSite airs:Site_1 ;
-  airs:excludesFromDirectory "false"^^xsd:boolean ;
-  airs:excludesFromWebsite "true"^^xsd:boolean ;
-  airs:hasAlternateName airs:AlternateName_1 ;
-  airs:hasFEIN "12345"^^xsd:string ;
-  airs:hasInternetResource airs:InternetResource_1 ;
-  airs:hasLegalStatus "incorporated 501c3"^^xsd:string ;
-  airs:hasLicenseAccreditation airs:LicenseAccreditation_1 ;
-  airs:hasRecordOwner "Jim Smith"^^xsd:string ;
-  airs:hasResourceInfo :ResourceInfo_1 ;
-  airs:hasServiceGroup :ServiceGroup_1 ;
-  airs:hasStatus "active"^^xsd:string ;
-  airs:hasYearIncorporated "1970"^^xsd:gYear ;
-  airs:offersService airs:Service_1 ;
-.
-airs:AlternateName
-  rdf:type owl:Class ;
-  rdfs:subClassOf owl:Thing ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:boolean ;
-      owl:onProperty airs:isConfidential ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dct:description ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dct:title ;
-    ] ;
-.
-airs:AlternateName_1
-  rdf:type owl:NamedIndividual ;
-  rdf:type airs:AlternateName ;
-  dct:description "The locals call it this."^^xsd:string ;
-  dct:title "Clinic by the Bridge"^^xsd:string ;
-  airs:isConfidential "false"^^xsd:boolean ;
-.
-airs:ApplicationProcess
-  rdf:type owl:Class ;
-  rdfs:comment "ApplicationProcess describes the steps taken to apply for or access the service; also known as the 'intake process'. For example, \"Call for an appointment\" or \"Walk in only\"."@en ;
-  rdfs:subClassOf owl:Thing ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dct:description ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dct:title ;
-    ] ;
-.
-airs:ApplicationProcess_1
-  rdf:type airs:ApplicationProcess ;
-  dct:description "The prospective enrollee must have their income verified."@en ;
-  dct:title "income verification"@en ;
-.
-airs:Document
-  rdf:type owl:Class ;
-  rdfs:comment "A document that is required in order to access services offered at a SiteService."@en ;
-  rdfs:subClassOf owl:Thing ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dct:description ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dct:title ;
-    ] ;
-.
-airs:Document_1
-  rdf:type airs:Document ;
-  dct:description "A valid State of Georgia Driver's License."@en ;
-  dct:title "driver's license"@en ;
-.
-airs:GenderRequirement
-  rdf:type owl:Class ;
-  rdfs:subClassOf owl:Thing ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom appearances:GenderStrict ;
-      owl:onProperty airs:requiresGender ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:nonNegativeInteger ;
-      owl:onProperty airs:requiresMaximumAge ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:nonNegativeInteger ;
-      owl:onProperty airs:requiresMinimumAge ;
-    ] ;
-.
-airs:GenderRequirement_1
-  rdf:type airs:GenderRequirement ;
-  airs:requiresGender <http://rdf.muninn-project.org/ontologies/organization#GenderStrict-M> ;
-  airs:requiresMinimumAge "0"^^xsd:nonNegativeInteger ;
-.
-airs:InternetResource
-  rdf:type owl:Class ;
-  rdfs:comment "A web location that has more information related to the SiteService, Agency, etc..  For example a facebook page for the Agency, that is supplementary to the Agency's main website."@en ;
-  rdfs:subClassOf owl:Thing ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dct:description ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty vcard:url ;
-    ] ;
-.
-airs:InternetResource_1
-  rdf:type airs:InternetResource ;
-  dct:description "A facebook page that the clinic keeps to maintain a social media presence."^^xsd:string ;
-  vcard:url "http://facebook.com/community_clinic"^^xsd:string ;
-.
-airs:InternetResource_2
-  rdf:type airs:InternetResource ;
-  dct:description "A twitter page that the clinic keeps to maintain a social media presence."^^xsd:string ;
-  vcard:url "http://twitter.com/community_clinic"^^xsd:string ;
-.
-airs:LanguageAvailability
-  rdf:type owl:Class ;
-  rdfs:comment "Languages offered, and available times, at the SiteService"@en ;
-  rdfs:subClassOf owl:Thing ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom ncal:Calendar ;
-      owl:onProperty airs:hasLanguageTimeOpen ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dc:language ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dct:description ;
-    ] ;
-.
-airs:LanguageAvailability_1
-  rdf:type airs:LanguageAvailability ;
-  dc:language "French"@en ;
-  dct:description "A native French speaker is often available at this location."@en ;
-  airs:hasLanguageTimeOpen ncal:Calendar_1 ;
-.
-airs:LicenseAccreditation
-  rdf:type owl:Class ;
-  rdfs:comment "If applicable, information about the license type (dct:title)/accreditation held by the agency and the body that licensed/accredited it."@en ;
-  rdfs:subClassOf owl:Thing ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dct:title ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty airs:isLicensedBy ;
-    ] ;
-.
-airs:LicenseAccreditation_1
-  rdf:type airs:LicenseAccreditation ;
-  dct:title "AIRS Resource Specialist Accreditation"^^xsd:string ;
-  airs:isLicensedBy "Alliance of Information and Referral Services (AIRS)"^^xsd:string ;
-.
-airs:OpenHours
-  rdf:type owl:Class ;
-  rdfs:comment "The hours that the SiteService is open.  Can have complex schedules.  See http://tools.ietf.org/html/rfc2445."^^xsd:string ;
-  rdfs:subClassOf owl:Thing ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom ncal:Calendar ;
-      owl:onProperty airs:opensAtTimes ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dct:description ;
-    ] ;
-.
-airs:OpenHours_1
-  rdf:type airs:OpenHours ;
-  dct:description "This program is open every weekday."@en ;
-  airs:opensAtTimes ncal:Calendar_2 ;
-.
-airs:ResourceInfo
-  rdf:type owl:Class ;
-  rdfs:comment "For property <http://www.w3.org/2006/vcard/ns:hasRelated>, it indicates the person within each agency who has overall responsibility for updating the information about the agency, its sites and its services, etc."@en ;
-  rdfs:subClassOf owl:Thing ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:boolean ;
-      owl:onProperty airs:isAvailableForDirectory ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:boolean ;
-      owl:onProperty airs:isAvailableForReferral ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:boolean ;
-      owl:onProperty airs:isAvailableForResearch ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:dateTime ;
-      owl:onProperty dct:created ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:dateTime ;
-      owl:onProperty airs:hasDateLastVerified ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:dateTime ;
-      owl:onProperty airs:hasDateOfLastAction ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty airs:attributesResourceSpecialist ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty airs:hasLastActionType ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom vcard:Contact ;
-      owl:onProperty vcard:hasRelated ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:cardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty dct:created ;
-    ] ;
-.
-airs:ResourceInfo_1
-  rdf:type airs:ResourceInfo ;
-  dct:created "2014-06-01T00:00:00.0Z"^^xsd:dateTime ;
-  airs:attributesResourceSpecialist "Donald Truman"^^xsd:string ;
-  airs:hasDateLastVerified "2014-06-03T18:13:51.0Z"^^xsd:dateTime ;
-  airs:hasDateOfLastAction "2014-06-07T00:00:00.0Z"^^xsd:dateTime ;
-  airs:hasLastActionType "updated ZIP Code"^^xsd:string ;
-  airs:isAvailableForDirectory "true"^^xsd:boolean ;
-  airs:isAvailableForReferral "true"^^xsd:boolean ;
-  airs:isAvailableForResearch "true"^^xsd:boolean ;
-.
-airs:ResourceInfo_2
-  rdf:type airs:ResourceInfo ;
-  dct:created "2014-06-01T00:00:00.0Z"^^xsd:dateTime ;
-  airs:attributesResourceSpecialist "Angie Capers"^^xsd:string ;
-  airs:hasDateLastVerified "2014-06-03T18:13:51.0Z"^^xsd:dateTime ;
-  airs:hasDateOfLastAction "2014-06-07T00:00:00.0Z"^^xsd:dateTime ;
-  airs:hasLastActionType "updated ZIP Code"^^xsd:string ;
-  airs:isAvailableForDirectory "true"^^xsd:boolean ;
-  airs:isAvailableForReferral "true"^^xsd:boolean ;
-  airs:isAvailableForResearch "true"^^xsd:boolean ;
-.
-airs:ResourceInfo_3
-  rdf:type airs:ResourceInfo ;
-  dct:created "2014-06-01T00:00:00.0Z"^^xsd:dateTime ;
-  airs:attributesResourceSpecialist "Billy Bigglesworth"^^xsd:string ;
-  airs:hasDateLastVerified "2014-06-03T18:13:51.0Z"^^xsd:dateTime ;
-  airs:hasDateOfLastAction "2014-06-07T00:00:00.0Z"^^xsd:dateTime ;
-  airs:hasLastActionType "updated ZIP Code"^^xsd:string ;
-  airs:isAvailableForDirectory "true"^^xsd:boolean ;
-  airs:isAvailableForReferral "true"^^xsd:boolean ;
-  airs:isAvailableForResearch "true"^^xsd:boolean ;
-.
-airs:Seasonal
-  rdf:type owl:Class ;
-  rdfs:comment "Activities that are only offered a certain time of year, such as seasonal tax preparation, summer camps and holiday meals."@en ;
-  rdfs:subClassOf owl:Thing ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom ncal:Calendar ;
-      owl:onProperty airs:hasSeasonalSchedule ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:boolean ;
-      owl:onProperty airs:isSeasonal ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dct:description ;
-    ] ;
-.
-airs:Seasonal_1
-  rdf:type airs:Seasonal ;
-  dct:description "This program is available only during the month of June."@en ;
-  airs:hasSeasonalSchedule ncal:Event_3 ;
-  airs:isSeasonal "true"^^xsd:boolean ;
-.
-airs:Service
-  rdf:type owl:Class ;
-  rdfs:comment "Akin to a \"Program\", as in for example \"a homeless outreach program\".  Can be delivered at many \"airs:Site[s]\", and the nexus of the two is an airs:SiteService"@en ;
-  rdfs:subClassOf owl:Thing ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dct:description ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:Agency ;
-      owl:onProperty airs:hasAgency ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:ResourceInfo ;
-      owl:onProperty airs:hasResourceInfo ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:SiteService ;
-      owl:onProperty airs:hasSiteService ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty airs:hasStatus ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty airs:hasServiceGroup ;
-      owl:someValuesFrom airs:ServiceGroup ;
-    ] ;
-.
-airs:ServiceArea
-  rdf:type owl:Class ;
-  rdfs:comment "This is the geographic area served by the SiteService. This can be anything from a single neighborhood to an entire country. Types can also be mixed; perhaps one city and 6 nearby ZIP codes. In this case the required element would be City and there would be additional ZIP codes. A national 1-800 hotline would have one Country element."@en ;
-  rdfs:subClassOf owl:Thing ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom dct:Location ;
-      owl:onProperty airs:servesGeographicArea ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dct:description ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty airs:isInCensusTrack ;
-    ] ;
-.
-airs:ServiceArea_1
-  rdf:type airs:ServiceArea ;
-  airs:isInCensusTrack "12345"^^xsd:string ;
-  airs:servesGeographicArea :Location_1 ;
-.
-airs:ServiceGroup
-  rdf:type owl:Class ;
-  rdfs:comment "Groups together multiple Services that are related somehow."@en ;
-  rdfs:subClassOf owl:Thing ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dct:description ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dct:title ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:ResourceInfo ;
-      owl:onProperty airs:hasResourceInfo ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:Service ;
-      owl:onProperty airs:offersService ;
-    ] ;
-.
-airs:ServiceGroup_1
-  rdf:type airs:ServiceGroup ;
-.
-airs:Service_1
-  rdf:type airs:Service ;
-  dct:description "Marrietta Regional Community Clinics"^^xsd:string ;
-  airs:hasAgency airs:Agency_1 ;
-  airs:hasServiceGroup :ServiceGroup_1 ;
-.
-airs:Site
-  rdf:type owl:Class ;
-  rdfs:comment "Sites are physical locations or none physical locations (a website or hotline). Site is used for two purposes. First, it is used by Agency to provide the location of the agency in Agency.AgencyLocation (note this type of Site would never have any SiteService children). Second, sites are also the location where services are provided. This would be the Agency.Site element (note this type of Site would have SiteService children)."@en ;
-  rdfs:subClassOf org:Site ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom <http://purl.org/dc/terms#:description> ;
-      owl:onProperty airs:hasDescription ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom <http://www.opengis.net/rdf#:Point> ;
-      owl:onProperty airs:hasSpatialLocation ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:boolean ;
-      owl:onProperty airs:excludesFromDirectory ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:boolean ;
-      owl:onProperty airs:excludesFromWebsite ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:boolean ;
-      owl:onProperty airs:isConfidential ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:boolean ;
-      owl:onProperty airs:publicAccessToTransportation ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dct:title ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty vcard:url ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty airs:describesSpatialLocation ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty airs:hasBusServiceAccess ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty airs:hasDisabilitiesAccess ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty airs:hasReasonAddressWithheld ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty airs:isLocatedAtCrossStreet ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom vcard:Contact ;
-      owl:onProperty vcard:hasRelated ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom vcard:TelephoneType ;
-      owl:onProperty vcard:hasTelephone ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:Agency ;
-      owl:onProperty airs:hasAgency ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:AlternateName ;
-      owl:onProperty airs:hasAlternateName ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:InternetResource ;
-      owl:onProperty airs:hasInternetResource ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:LanguageAvailability ;
-      owl:onProperty airs:hasLanguageAvailability ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:OpenHours ;
-      owl:onProperty airs:opensAtTimes ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:ResourceInfo ;
-      owl:onProperty airs:hasResourceInfo ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:Seasonal ;
-      owl:onProperty airs:hasSeasonalSchedule ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:SiteService ;
-      owl:onProperty airs:hasSiteService ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:cardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty airs:hasAgency ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty airs:hasStatus ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty airs:isConfidential ;
-    ] ;
-.
-airs:SiteService
-  rdf:type owl:Class ;
-  rdfs:comment "SiteService is the smallest unit describing a \"service\" that is offered at a Site. It can be thought of as the intersection of a Site and a Taxonomy code (or related Taxonomy codes) and meta data about what is offered. A \"Service\" however is not represented as its own element because the \"Service\" cannot exist without a location (the site)."@en ;
-  rdfs:subClassOf owl:Thing ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:boolean ;
-      owl:onProperty airs:isNotAlwaysAvailable ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dct:description ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty dct:title ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty airs:acceptsPaymentMethod ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty airs:hasTaxonomyCode ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty airs:requiresFamily ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty airs:requiresGeneralEligibility ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty airs:requiresIncome ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty airs:requiresResidency ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty airs:structuresFees ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom vcard:TelephoneType ;
-      owl:onProperty vcard:hasTelephone ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:Address ;
-      owl:onProperty airs:hasAddress ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:ApplicationProcess ;
-      owl:onProperty airs:hasApplicationProcess ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:Document ;
-      owl:onProperty airs:requiresDocument ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:GenderRequirement ;
-      owl:onProperty airs:hasGenderRequirement ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:InternetResource ;
-      owl:onProperty airs:hasInternetResource ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:LanguageAvailability ;
-      owl:onProperty airs:hasLanguageAvailability ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:LanguageAvailability ;
-      owl:onProperty airs:offersSpokenLanguage ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:ResourceInfo ;
-      owl:onProperty airs:hasResourceInfo ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:Service ;
-      owl:onProperty airs:offersService ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:ServiceArea ;
-      owl:onProperty airs:servesGeographicArea ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom airs:Site ;
-      owl:onProperty airs:hasSite ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty airs:hasStatus ;
-    ] ;
-.
-airs:SiteService_1
-  rdf:type owl:NamedIndividual ;
-  rdf:type airs:SiteService ;
-  dct:description "This is a new service location on Main Street."@en ;
-  dct:title "The Community Clinic Main Street Annex"@en ;
-  vcard:hasTelephone :Voice_2 ;
-  airs:acceptsPaymentMethod "Medicaid"^^xsd:string ;
-  airs:hasAddress airs:Address_1 ;
-  airs:hasApplicationProcess airs:ApplicationProcess_1 ;
-  airs:hasGenderRequirement airs:GenderRequirement_1 ;
-  airs:hasInternetResource airs:InternetResource_2 ;
-  airs:hasLanguageAvailability airs:LanguageAvailability_1 ;
-  airs:hasResourceInfo :ResourceInfo_2 ;
-  airs:hasSite airs:Site_1 ;
-  airs:hasStatus "active"^^xsd:string ;
-  airs:hasTaxonomyCode "AB-123"^^xsd:string ;
-  airs:hasTaxonomyCode "CD-345"^^xsd:string ;
-  airs:isInCensusTrack "3452"^^xsd:string ;
-  airs:isNotAlwaysAvailable "false"^^xsd:boolean ;
-  airs:offersService airs:Service_1 ;
-  airs:offersSpokenLanguage airs:LanguageAvailability_1 ;
-  airs:requiresDocument airs:Document_1 ;
-  airs:requiresFamily "Family is encouraged to enroll."@en ;
-  airs:requiresGeneralEligibility "Must be receiving Medicaid."@en ;
-  airs:requiresIncome "Must be at 150% of poverty level."@en ;
-  airs:requiresResidency "Must be a resident of Marietta."@en ;
-  airs:servesGeographicArea :ServiceArea_1 ;
-.
-airs:Site_1
-  rdf:type owl:NamedIndividual ;
-  rdf:type airs:Site ;
-  org:siteOf airs:Agency_1 ;
-  airs:hasStatus "active"^^xsd:string ;
-.
-airs:acceptsPaymentMethod
-  rdf:type owl:DatatypeProperty ;
-.
-airs:attributesResourceSpecialist
-  rdf:type owl:DatatypeProperty ;
-.
-airs:describesInternetResource
-  rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf airs:hasInternetResource ;
-.
-airs:describesPhysicalLocation
-  rdf:type owl:DatatypeProperty ;
-.
-airs:describesSpatialLocation
-  rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf airs:hasSpatialLocation ;
-.
-airs:excludesFromDirectory
-  rdf:type owl:DatatypeProperty ;
-.
-airs:excludesFromWebsite
-  rdf:type owl:DatatypeProperty ;
-  rdfs:range xsd:boolean ;
-.
-airs:explainsNoPhysicalAddress
-  rdf:type owl:DatatypeProperty ;
-.
-airs:hasAddress
-  rdf:type owl:ObjectProperty ;
-.
-airs:hasAgency
-  rdf:type owl:ObjectProperty ;
-.
-airs:hasAlternateName
-  rdf:type owl:ObjectProperty ;
-  rdfs:comment "These are alternate names for an object. Confidential indicates that the alternate name won't be shared with the public."@en ;
-.
-airs:hasApplicationProcess
-  rdf:type owl:ObjectProperty ;
-.
-airs:hasAreaDefinition
-  rdf:type owl:DatatypeProperty ;
-.
-airs:hasBusServiceAccess
-  rdf:type owl:DatatypeProperty ;
-.
-airs:hasDateAdded
-  rdf:type owl:DatatypeProperty ;
-.
-airs:hasDateLastVerified
-  rdf:type owl:DatatypeProperty ;
-.
-airs:hasDateOfLastAction
-  rdf:type owl:DatatypeProperty ;
-.
-airs:hasDescription
-  rdf:type owl:DatatypeProperty ;
-  rdf:type owl:ObjectProperty ;
-.
-airs:hasDisabilitiesAccess
-  rdf:type owl:DatatypeProperty ;
-.
-airs:hasExplanationForNoPhysicalAddress
-  rdf:type owl:DatatypeProperty ;
-.
-airs:hasFEIN
-  rdf:type owl:DatatypeProperty ;
-.
-airs:hasGenderRequirement
-  rdf:type owl:ObjectProperty ;
-.
-airs:hasIRSStatus
-  rdf:type owl:DatatypeProperty ;
-.
-airs:hasInternetResource
-  rdf:type owl:ObjectProperty ;
-.
-airs:hasLanguageAvailability
-  rdf:type owl:ObjectProperty ;
-.
-airs:hasLanguageName
-  rdf:type owl:DatatypeProperty ;
-.
-airs:hasLanguageTimeOpen
-  rdf:type owl:ObjectProperty ;
-.
-airs:hasLastActionType
-  rdf:type owl:DatatypeProperty ;
-  rdfs:comment "Describes what update action was taken to update the resource information, such as \"updated the resource specialist's name\"."^^xsd:string ;
-.
-airs:hasLegalStatus
-  rdf:type owl:DatatypeProperty ;
-.
-airs:hasLicenseAccreditation
-  rdf:type owl:ObjectProperty ;
-.
-airs:hasLicenseType
-  rdf:type owl:DatatypeProperty ;
-  rdf:type owl:ObjectProperty ;
-.
-airs:hasProgramName
-  rdf:type owl:DatatypeProperty ;
-.
-airs:hasReasonAddressWithheld
-  rdf:type owl:DatatypeProperty ;
-  rdfs:comment "Use this if the address can not be shared due to security concerns, such as an assaulted women's shelter. While it is possible to code an address as Confidential=\"true\", in this case the address is so confidential that it won't be shared at all."@en ;
-.
-airs:hasRecordOwner
-  rdf:type owl:DatatypeProperty ;
-  rdfs:comment "This is a unique string indicating the organization that created and maintains this Agency record."@en ;
-.
-airs:hasResourceInfo
-  rdf:type owl:AsymmetricProperty ;
-  rdf:type owl:ObjectProperty ;
-.
-airs:hasSeasonalSchedule
-  rdf:type owl:ObjectProperty ;
-.
-airs:hasServiceGroup
-  rdf:type owl:AsymmetricProperty ;
-  rdf:type owl:ObjectProperty ;
-.
-airs:hasServiceGroupName
-  rdf:type owl:DatatypeProperty ;
-.
-airs:hasSite
-  rdf:type owl:AsymmetricProperty ;
-  rdf:type owl:ObjectProperty ;
-.
-airs:hasSiteService
-  rdf:type owl:ObjectProperty ;
-.
-airs:hasSpatialLocation
-  rdf:type owl:DatatypeProperty ;
-  rdf:type owl:ObjectProperty ;
-.
-airs:hasStatus
-  rdf:type owl:DatatypeProperty ;
-  rdfs:range [
-      rdf:type rdfs:Datatype ;
-      owl:oneOf [
-          rdf:type rdf:List ;
-          rdf:first "active"^^xsd:string ;
-          rdf:rest [
-              rdf:type rdf:List ;
-              rdf:first "defunct"^^xsd:string ;
-              rdf:rest [
-                  rdf:type rdf:List ;
-                  rdf:first "inactive"^^xsd:string ;
-                  rdf:rest () ;
-                ] ;
-            ] ;
-        ] ;
-    ] ;
-.
-airs:hasTaxonomyCode
-  rdf:type owl:DatatypeProperty ;
-.
-airs:hasTelephone
-  rdf:type owl:DatatypeProperty ;
-  rdf:type owl:ObjectProperty ;
-.
-airs:hasYearIncorporated
-  rdf:type owl:DatatypeProperty ;
-.
-airs:isAvailableForDirectory
-  rdf:type owl:DatatypeProperty ;
-.
-airs:isAvailableForReferral
-  rdf:type owl:DatatypeProperty ;
-.
-airs:isAvailableForResearch
-  rdf:type owl:DatatypeProperty ;
-.
-airs:isConfidential
-  rdf:type owl:DatatypeProperty ;
-.
-airs:isInCensusTrack
-  rdf:type owl:DatatypeProperty ;
-.
-airs:isLicensedBy
-  rdf:type owl:DatatypeProperty ;
-.
-airs:isLocatedAtCrossStreet
-  rdf:type owl:DatatypeProperty ;
-.
-airs:isLocatedInCity
-  rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf airs:servesGeographicArea ;
-.
-airs:isLocatedInCounty
-  rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf airs:servesGeographicArea ;
-.
-airs:isLocatedInPostalCode
-  rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf airs:servesGeographicArea ;
-.
-airs:isLocatedInState
-  rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf airs:servesGeographicArea ;
-.
-airs:isLocatedWithinCountry
-  rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf airs:servesGeographicArea ;
-.
-airs:isMailingAddress
-  rdf:type owl:DatatypeProperty ;
-.
-airs:isNotAlwaysAvailable
-  rdf:type owl:DatatypeProperty ;
-.
-airs:isPhysicalAddress
-  rdf:type owl:DatatypeProperty ;
-  rdfs:range xsd:boolean ;
-.
-airs:isSeasonal
-  rdf:type owl:DatatypeProperty ;
-.
-airs:offersLanguage
-  rdf:type owl:ObjectProperty ;
-.
-airs:offersService
-  rdf:type owl:ObjectProperty ;
-.
-airs:offersSpokenLanguage
-  rdf:type owl:ObjectProperty ;
-.
-airs:opensAtTimes
-  rdf:type owl:ObjectProperty ;
-.
-airs:opensAtTimesNotes
-  rdf:type owl:DatatypeProperty ;
-  rdf:type owl:ObjectProperty ;
-.
-airs:publicAccessToTransportation
-  rdf:type owl:DatatypeProperty ;
-.
-airs:requiresDocument
-  rdf:type owl:ObjectProperty ;
-.
-airs:requiresFamily
-  rdf:type owl:DatatypeProperty ;
-.
-airs:requiresGender
-  rdf:type owl:ObjectProperty ;
-  rdfs:comment "Information about any age or gender related requirements or inclusions for a particular service at a particular location."@en ;
-.
-airs:requiresGeneralEligibility
-  rdf:type owl:DatatypeProperty ;
-  rdfs:comment "General eligibility is a text area to list any eligibility requirements for participation or services. This can include any exclusions, both negative and positive requirements (i.e. must have/ can't have are all requirements)"@en ;
-.
-airs:requiresIncome
-  rdf:type owl:DatatypeProperty ;
-.
-airs:requiresMaximumAge
-  rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf airs:requiresGender ;
-.
-airs:requiresMinimumAge
-  rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf airs:requiresGender ;
-.
-airs:requiresResidency
-  rdf:type owl:DatatypeProperty ;
-.
-airs:servesGeographicArea
-  rdf:type owl:DatatypeProperty ;
-  rdf:type owl:ObjectProperty ;
-.
-airs:structuresFees
-  rdf:type owl:DatatypeProperty ;
-.
+<https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#> rdf:type owl:Ontology ;
+                                                                                         
+                                                                                         dct:date "2014-06-26"^^xsd:date ;
+                                                                                         
+                                                                                         dc:title "The Alliance of Information and Referral Services (AIRS) Linked Open Vocabulary"^^xsd:string ;
+                                                                                         
+                                                                                         dct:description "The AIRS Linked Open Vocabulary is a way to describe human services information and referral (I&R) concepts.  AIRS is the Alliance of Information and Referral Services (airs.org), which possesses over 1,000 member agencies primarily in the United States and Canada.  The AIRS LOV is based on the AIRS XML Schema, available at: https://airs-xml.googlecode.com/hg/tags/3.1/airs.xsd"@en ;
+                                                                                         
+                                                                                         owl:priorVersion <https://raw.githubusercontent.com/airs-linked-data/lov/v0.0.8/src/airs_vocabulary.ttl#> ;
+                                                                                         
+                                                                                         owl:versionIRI <https://raw.githubusercontent.com/airs-linked-data/lov/v0.0.9/src/airs_vocabulary.ttl#> .
+
+
+#################################################################
+#
+#    Annotation properties
+#
+#################################################################
+
+
+###  http://purl.org/dc/elements/1.1/language
+
+dc:language rdf:type owl:AnnotationProperty .
+
+
+
+###  http://purl.org/dc/terms/created
+
+dct:created rdf:type owl:AnnotationProperty .
+
+
+
+###  http://purl.org/dc/terms/description
+
+dct:description rdf:type owl:AnnotationProperty .
+
+
+
+###  http://purl.org/dc/terms/title
+
+dct:title rdf:type owl:AnnotationProperty .
+
+
+
+###  http://www.w3.org/2006/vcard/ns#country-name
+
+vcard:country-name rdf:type owl:AnnotationProperty .
+
+
+
+###  http://www.w3.org/2006/vcard/ns#hasRelated
+
+vcard:hasRelated rdf:type owl:AnnotationProperty .
+
+
+
+###  http://www.w3.org/2006/vcard/ns#hasTelephone
+
+vcard:hasTelephone rdf:type owl:AnnotationProperty .
+
+
+
+###  http://www.w3.org/2006/vcard/ns#locality
+
+vcard:locality rdf:type owl:AnnotationProperty .
+
+
+
+###  http://www.w3.org/2006/vcard/ns#organization-name
+
+vcard:organization-name rdf:type owl:AnnotationProperty .
+
+
+
+###  http://www.w3.org/2006/vcard/ns#postal-code
+
+vcard:postal-code rdf:type owl:AnnotationProperty .
+
+
+
+###  http://www.w3.org/2006/vcard/ns#region
+
+vcard:region rdf:type owl:AnnotationProperty .
+
+
+
+###  http://www.w3.org/2006/vcard/ns#street-address
+
+vcard:street-address rdf:type owl:AnnotationProperty .
+
+
+
+###  http://www.w3.org/2006/vcard/ns#url
+
+vcard:url rdf:type owl:AnnotationProperty .
+
+
+
+###  http://www.w3.org/ns/org#hasSite
+
+org:hasSite rdf:type owl:AnnotationProperty .
+
+
+
+###  http://www.w3.org/ns/org#siteOf
+
+org:siteOf rdf:type owl:AnnotationProperty .
+
+
+
+
+
+#################################################################
+#
+#    Datatypes
+#
+#################################################################
+
+
+###  http://www.w3.org/2001/XMLSchema#gYear
+
+xsd:gYear rdf:type rdfs:Datatype .
+
+
+
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://www.w3.org/2006/vcard/ns#hasEmail
+
+vcard:hasEmail rdf:type owl:ObjectProperty .
+
+
+
+###  http://www.w3.org/2006/vcard/ns#hasRelated
+
+vcard:hasRelated rdf:type owl:ObjectProperty .
+
+
+
+###  http://www.w3.org/2006/vcard/ns#hasTelephone
+
+vcard:hasTelephone rdf:type owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#attributesResourceSpecialist
+
+airs:attributesResourceSpecialist rdf:type owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#describesInternetResource
+
+airs:describesInternetResource rdf:type owl:ObjectProperty ;
+                               
+                               rdfs:subPropertyOf airs:hasInternetResource .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#describesSpatialLocation
+
+airs:describesSpatialLocation rdf:type owl:ObjectProperty ;
+                              
+                              rdfs:subPropertyOf airs:hasSpatialLocation .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasAddress
+
+airs:hasAddress rdf:type owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasAgency
+
+airs:hasAgency rdf:type owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasAlternateName
+
+airs:hasAlternateName rdf:type owl:ObjectProperty ;
+                      
+                      rdfs:comment "These are alternate names for an object. Confidential indicates that the alternate name won't be shared with the public."@en .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasApplicationProcess
+
+airs:hasApplicationProcess rdf:type owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasDescription
+
+airs:hasDescription rdf:type owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasGenderRequirement
+
+airs:hasGenderRequirement rdf:type owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasInternetResource
+
+airs:hasInternetResource rdf:type owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasLanguageAvailability
+
+airs:hasLanguageAvailability rdf:type owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasLanguageTimeOpen
+
+airs:hasLanguageTimeOpen rdf:type owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasLicenseAccreditation
+
+airs:hasLicenseAccreditation rdf:type owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasLicenseType
+
+airs:hasLicenseType rdf:type owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasResourceInfo
+
+airs:hasResourceInfo rdf:type owl:AsymmetricProperty ,
+                              owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasSeasonalSchedule
+
+airs:hasSeasonalSchedule rdf:type owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasServiceGroup
+
+airs:hasServiceGroup rdf:type owl:AsymmetricProperty ,
+                              owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasSite
+
+airs:hasSite rdf:type owl:AsymmetricProperty ,
+                      owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasSiteService
+
+airs:hasSiteService rdf:type owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasSpatialLocation
+
+airs:hasSpatialLocation rdf:type owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasTelephone
+
+airs:hasTelephone rdf:type owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isLocatedInCity
+
+airs:isLocatedInCity rdf:type owl:ObjectProperty ;
+                     
+                     rdfs:subPropertyOf airs:servesGeographicArea .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isLocatedInCounty
+
+airs:isLocatedInCounty rdf:type owl:ObjectProperty ;
+                       
+                       rdfs:subPropertyOf airs:servesGeographicArea .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isLocatedInPostalCode
+
+airs:isLocatedInPostalCode rdf:type owl:ObjectProperty ;
+                           
+                           rdfs:subPropertyOf airs:servesGeographicArea .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isLocatedInState
+
+airs:isLocatedInState rdf:type owl:ObjectProperty ;
+                      
+                      rdfs:subPropertyOf airs:servesGeographicArea .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isLocatedWithinCountry
+
+airs:isLocatedWithinCountry rdf:type owl:ObjectProperty ;
+                            
+                            rdfs:subPropertyOf airs:servesGeographicArea .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#offersService
+
+airs:offersService rdf:type owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#opensAtTimes
+
+airs:opensAtTimes rdf:type owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#opensAtTimesNotes
+
+airs:opensAtTimesNotes rdf:type owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#requiresDocument
+
+airs:requiresDocument rdf:type owl:ObjectProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#requiresGender
+
+airs:requiresGender rdf:type owl:ObjectProperty ;
+                    
+                    rdfs:comment "Information about any age or gender related requirements or inclusions for a particular service at a particular location."@en .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#requiresMaximumAge
+
+airs:requiresMaximumAge rdf:type owl:ObjectProperty ;
+                        
+                        rdfs:subPropertyOf airs:requiresGender .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#requiresMinimumAge
+
+airs:requiresMinimumAge rdf:type owl:ObjectProperty ;
+                        
+                        rdfs:subPropertyOf airs:requiresGender .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#servesGeographicArea
+
+airs:servesGeographicArea rdf:type owl:ObjectProperty .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://purl.org/dc/elements/1.1/language
+
+dc:language rdf:type owl:DatatypeProperty .
+
+
+
+###  http://purl.org/dc/terms/created
+
+dct:created rdf:type owl:DatatypeProperty .
+
+
+
+###  http://purl.org/dc/terms/description
+
+dct:description rdf:type owl:DatatypeProperty .
+
+
+
+###  http://purl.org/dc/terms/title
+
+dct:title rdf:type owl:DatatypeProperty .
+
+
+
+###  http://www.w3.org/2006/vcard/ns#organization-name
+
+vcard:organization-name rdf:type owl:DatatypeProperty .
+
+
+
+###  http://www.w3.org/2006/vcard/ns#url
+
+vcard:url rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#acceptsPaymentMethod
+
+airs:acceptsPaymentMethod rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#describesInternetResource
+
+airs:describesInternetResource rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#describesPhysicalLocation
+
+airs:describesPhysicalLocation rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#describesSpatialLocation
+
+airs:describesSpatialLocation rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#excludesFromWebsite
+
+airs:excludesFromWebsite rdf:type owl:DatatypeProperty ;
+                         
+                         rdfs:range xsd:boolean .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#explainsNoPhysicalAddress
+
+airs:explainsNoPhysicalAddress rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasAreaDefinition
+
+airs:hasAreaDefinition rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasDateAdded
+
+airs:hasDateAdded rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasDateLastVerified
+
+airs:hasDateLastVerified rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasDateOfLastAction
+
+airs:hasDateOfLastAction rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasDescription
+
+airs:hasDescription rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasDirections
+
+airs:hasDirections rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasDisabilitiesAccess
+
+airs:hasDisabilitiesAccess rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasExplanationForNoPhysicalAddress
+
+airs:hasExplanationForNoPhysicalAddress rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasFEIN
+
+airs:hasFEIN rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasIRSStatus
+
+airs:hasIRSStatus rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasInternetResource
+
+airs:hasInternetResource rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasLastActionType
+
+airs:hasLastActionType rdf:type owl:DatatypeProperty ;
+                       
+                       rdfs:comment "Describes what update action was taken to update the resource information, such as \"updated the resource specialist's name\"."^^xsd:string .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasLegalStatus
+
+airs:hasLegalStatus rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasLicenseType
+
+airs:hasLicenseType rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasProgramName
+
+airs:hasProgramName rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasReasonAddressWithheld
+
+airs:hasReasonAddressWithheld rdf:type owl:DatatypeProperty ;
+                              
+                              rdfs:comment "Use this if the address can not be shared due to security concerns, such as an assaulted women's shelter. While it is possible to code an address as Confidential=\"true\", in this case the address is so confidential that it won't be shared at all."@en .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasRecordOwner
+
+airs:hasRecordOwner rdf:type owl:DatatypeProperty ;
+                    
+                    rdfs:comment "This is a unique string indicating the organization that created and maintains this Agency record."@en .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasServiceGroupName
+
+airs:hasServiceGroupName rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasSpatialLocation
+
+airs:hasSpatialLocation rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasStatus
+
+airs:hasStatus rdf:type owl:DatatypeProperty ;
+               
+               rdfs:range [ rdf:type rdfs:Datatype ;
+                            owl:oneOf [ rdf:type rdf:List ;
+                                        rdf:first "active"^^xsd:string ;
+                                        rdf:rest [ rdf:type rdf:List ;
+                                                   rdf:first "defunct"^^xsd:string ;
+                                                   rdf:rest [ rdf:type rdf:List ;
+                                                              rdf:first "inactive"^^xsd:string ;
+                                                              rdf:rest rdf:nil
+                                                            ]
+                                                 ]
+                                      ]
+                          ] .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasTaxonomyCode
+
+airs:hasTaxonomyCode rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasTelephone
+
+airs:hasTelephone rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasTransportationServiceAccess
+
+airs:hasTransportationServiceAccess rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#hasYearIncorporated
+
+airs:hasYearIncorporated rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isAvailableForDirectory
+
+airs:isAvailableForDirectory rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isAvailableForReferral
+
+airs:isAvailableForReferral rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isAvailableForResearch
+
+airs:isAvailableForResearch rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isConfidential
+
+airs:isConfidential rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isInCensusTract
+
+airs:isInCensusTract rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isLicensedBy
+
+airs:isLicensedBy rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isLocatedAtCrossStreet
+
+airs:isLocatedAtCrossStreet rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isLocatedInCity
+
+airs:isLocatedInCity rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isLocatedInCounty
+
+airs:isLocatedInCounty rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isLocatedInPostalCode
+
+airs:isLocatedInPostalCode rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isLocatedInState
+
+airs:isLocatedInState rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isLocatedWithinCountry
+
+airs:isLocatedWithinCountry rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isMailingAddress
+
+airs:isMailingAddress rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isNotAlwaysAvailable
+
+airs:isNotAlwaysAvailable rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isPhysicalAddress
+
+airs:isPhysicalAddress rdf:type owl:DatatypeProperty ;
+                       
+                       rdfs:range xsd:boolean .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#isSeasonal
+
+airs:isSeasonal rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#opensAtTimesNotes
+
+airs:opensAtTimesNotes rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#publicAccessToTransportation
+
+airs:publicAccessToTransportation rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#requiresFamily
+
+airs:requiresFamily rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#requiresGeneralEligibility
+
+airs:requiresGeneralEligibility rdf:type owl:DatatypeProperty ;
+                                
+                                rdfs:comment "General eligibility is a text area to list any eligibility requirements for participation or services. This can include any exclusions, both negative and positive requirements (i.e. must have/ can't have are all requirements)"@en .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#requiresIncome
+
+airs:requiresIncome rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#requiresMaximumAge
+
+airs:requiresMaximumAge rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#requiresMinimumAge
+
+airs:requiresMinimumAge rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#requiresResidency
+
+airs:requiresResidency rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#servesGeographicArea
+
+airs:servesGeographicArea rdf:type owl:DatatypeProperty .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#structuresFees
+
+airs:structuresFees rdf:type owl:DatatypeProperty .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://purl.org/dc/terms/Location
+
+dct:Location rdf:type owl:Class .
+
+
+
+###  http://rdf.muninn-project.org/ontologies/appearances#GenderStrict
+
+appearances:GenderStrict rdf:type owl:Class .
+
+
+
+###  http://www.opengis.net/rdf#:Point
+
+<http://www.opengis.net/rdf#:Point> rdf:type owl:Class .
+
+
+
+###  http://www.semanticdesktop.org/ontologies/2007/04/02/ncal#Calendar
+
+ncal:Calendar rdf:type owl:Class .
+
+
+
+###  http://www.w3.org/2006/vcard/ns#Address
+
+vcard:Address rdf:type owl:Class .
+
+
+
+###  http://www.w3.org/2006/vcard/ns#Contact
+
+vcard:Contact rdf:type owl:Class .
+
+
+
+###  http://www.w3.org/2006/vcard/ns#Email
+
+vcard:Email rdf:type owl:Class .
+
+
+
+###  http://www.w3.org/2006/vcard/ns#TelephoneType
+
+vcard:TelephoneType rdf:type owl:Class .
+
+
+
+###  http://www.w3.org/ns/org#FormalOrganization
+
+org:FormalOrganization rdf:type owl:Class .
+
+
+
+###  http://www.w3.org/ns/org#Site
+
+org:Site rdf:type owl:Class .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#Address
+
+airs:Address rdf:type owl:Class ;
+             
+             rdfs:subClassOf vcard:Address ,
+                             airs:Address ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty dct:description ;
+                               owl:allValuesFrom xsd:string
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty airs:hasExplanationForNoPhysicalAddress ;
+                               owl:allValuesFrom xsd:string
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty airs:isPhysicalAddress ;
+                               owl:allValuesFrom xsd:boolean
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty airs:hasResourceInfo ;
+                               owl:allValuesFrom airs:ResourceInfo
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty airs:isMailingAddress ;
+                               owl:allValuesFrom xsd:boolean
+                             ] ;
+             
+             rdfs:comment "This represents a referenceable street location of an item, using an addressing system other than geospatial terms, often with postal system terms.  airs:hasDescription is a description of the physical location or other information pertinent to this address, and hasExplanationForNoPhysicalAddress clarifies why the address doesn't have a physical presence."@en .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#Agency
+
+airs:Agency rdf:type owl:Class ;
+            
+            rdfs:label "Agency"@en ,
+                       "Agencia"@es ,
+                       "Agence"@fr ;
+            
+            rdfs:subClassOf org:FormalOrganization ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty vcard:hasRelated ;
+                              owl:allValuesFrom vcard:Contact
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty airs:hasResourceInfo ;
+                              owl:allValuesFrom airs:ResourceInfo
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty airs:hasLegalStatus ;
+                              owl:allValuesFrom xsd:string
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty airs:hasInternetResource ;
+                              owl:allValuesFrom airs:InternetResource
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty vcard:hasTelephone ;
+                              owl:allValuesFrom vcard:TelephoneType
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty airs:hasAlternateName ;
+                              owl:allValuesFrom airs:AlternateName
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty vcard:organization-name ;
+                              owl:allValuesFrom xsd:string
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty airs:hasFEIN ;
+                              owl:allValuesFrom xsd:string
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty dct:description ;
+                              owl:allValuesFrom xsd:string
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty airs:hasStatus ;
+                              owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty airs:hasServiceGroup ;
+                              owl:allValuesFrom airs:ServiceGroup
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty vcard:hasEmail ;
+                              owl:allValuesFrom vcard:Email
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty airs:offersService ;
+                              owl:allValuesFrom airs:Service
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty airs:hasLicenseAccreditation ;
+                              owl:allValuesFrom airs:LicenseAccreditation
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty airs:hasYearIncorporated ;
+                              owl:allValuesFrom xsd:gYear
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty airs:hasRecordOwner ;
+                              owl:allValuesFrom xsd:string
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty airs:excludesFromWebsite ;
+                              owl:allValuesFrom xsd:boolean
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty vcard:url ;
+                              owl:allValuesFrom xsd:string
+                            ] ;
+            
+            rdfs:comment "Agencies are organizations that offer services at locations. Agencies provide services directly or they may have \"child\" agencies that offer these services. Services are offered at sites that belong to an agency. Services are represented by the combination of taxonomy codes offered at a location; this idea is called a SiteService. To recap: Agencies don't provide services directly, they provide them through sites. For property <http://www.w3.org/2006/vcard/ns:hasRelated> This represents the agency contact.  1) Contact is the person at an Agency, or Site who will interface with the public or who has responsibility for the entity, like a site manager or director."@en .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#AlternateName
+
+airs:AlternateName rdf:type owl:Class ;
+                   
+                   rdfs:subClassOf owl:Thing ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty dct:description ;
+                                     owl:allValuesFrom xsd:string
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty dct:title ;
+                                     owl:allValuesFrom xsd:string
+                                   ] .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#ApplicationProcess
+
+airs:ApplicationProcess rdf:type owl:Class ;
+                        
+                        rdfs:subClassOf owl:Thing ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty dct:description ;
+                                          owl:allValuesFrom xsd:string
+                                        ] ;
+                        
+                        rdfs:comment "ApplicationProcess describes the steps taken to apply for or access the service; also known as the 'intake process'. For example, \"Call for an appointment\" or \"Walk in only\"."@en .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#Document
+
+airs:Document rdf:type owl:Class ;
+              
+              rdfs:subClassOf owl:Thing ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty dct:description ;
+                                owl:allValuesFrom xsd:string
+                              ] ;
+              
+              rdfs:comment "A document that is required in order to access services offered at a SiteService."@en .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#GenderRequirement
+
+airs:GenderRequirement rdf:type owl:Class ;
+                       
+                       rdfs:subClassOf owl:Thing ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty airs:requiresMaximumAge ;
+                                         owl:allValuesFrom xsd:nonNegativeInteger
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty airs:requiresMinimumAge ;
+                                         owl:allValuesFrom xsd:nonNegativeInteger
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty airs:requiresGender ;
+                                         owl:allValuesFrom appearances:GenderStrict
+                                       ] .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#InternetResource
+
+airs:InternetResource rdf:type owl:Class ;
+                      
+                      rdfs:subClassOf owl:Thing ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty vcard:url ;
+                                        owl:allValuesFrom xsd:string
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty dct:description ;
+                                        owl:allValuesFrom xsd:string
+                                      ] ;
+                      
+                      rdfs:comment "A web location that has more information related to the SiteService, Agency, etc..  For example a facebook page for the Agency, that is supplementary to the Agency's main website."@en .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#LanguageAvailability
+
+airs:LanguageAvailability rdf:type owl:Class ;
+                          
+                          rdfs:subClassOf owl:Thing ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty dc:language ;
+                                            owl:allValuesFrom xsd:string
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty airs:hasLanguageTimeOpen ;
+                                            owl:allValuesFrom ncal:Calendar
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty dct:description ;
+                                            owl:allValuesFrom xsd:string
+                                          ] ;
+                          
+                          rdfs:comment "Languages offered, and available times, at the SiteService"@en .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#LicenseAccreditation
+
+airs:LicenseAccreditation rdf:type owl:Class ;
+                          
+                          rdfs:subClassOf owl:Thing ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty dct:title ;
+                                            owl:allValuesFrom xsd:string
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty airs:isLicensedBy ;
+                                            owl:allValuesFrom xsd:string
+                                          ] ;
+                          
+                          rdfs:comment "If applicable, information about the license type (dct:title)/accreditation held by the agency and the body that licensed/accredited it."@en .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#OpenHours
+
+airs:OpenHours rdf:type owl:Class ;
+               
+               rdfs:subClassOf owl:Thing ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty airs:opensAtTimes ;
+                                 owl:allValuesFrom ncal:Calendar
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty dct:description ;
+                                 owl:allValuesFrom xsd:string
+                               ] ;
+               
+               rdfs:comment "The hours that the SiteService is open.  Can have complex schedules.  See http://tools.ietf.org/html/rfc2445."^^xsd:string .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#ResourceInfo
+
+airs:ResourceInfo rdf:type owl:Class ;
+                  
+                  rdfs:subClassOf owl:Thing ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty airs:isAvailableForResearch ;
+                                    owl:allValuesFrom xsd:boolean
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty airs:isAvailableForReferral ;
+                                    owl:allValuesFrom xsd:boolean
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty airs:isAvailableForDirectory ;
+                                    owl:allValuesFrom xsd:boolean
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty airs:hasDateLastVerified ;
+                                    owl:allValuesFrom xsd:dateTime
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty airs:hasDateOfLastAction ;
+                                    owl:allValuesFrom xsd:dateTime
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty dct:created ;
+                                    owl:allValuesFrom xsd:dateTime
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty airs:hasLastActionType ;
+                                    owl:allValuesFrom xsd:string
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty airs:attributesResourceSpecialist ;
+                                    owl:allValuesFrom vcard:Contact
+                                  ] ;
+                  
+                  rdfs:comment "For property <http://www.w3.org/2006/vcard/ns:hasRelated>, it indicates the person within each agency who has overall responsibility for updating the information about the agency, its sites and its services, etc."@en .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#Seasonal
+
+airs:Seasonal rdf:type owl:Class ;
+              
+              rdfs:subClassOf owl:Thing ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty airs:isSeasonal ;
+                                owl:allValuesFrom xsd:boolean
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty airs:hasSeasonalSchedule ;
+                                owl:allValuesFrom ncal:Calendar
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty dct:description ;
+                                owl:allValuesFrom xsd:string
+                              ] ;
+              
+              rdfs:comment "Activities that are only offered a certain time of year, such as seasonal tax preparation, summer camps and holiday meals."@en .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#Service
+
+airs:Service rdf:type owl:Class ;
+             
+             rdfs:subClassOf owl:Thing ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty airs:hasAgency ;
+                               owl:allValuesFrom airs:Agency
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty airs:hasSiteService ;
+                               owl:allValuesFrom airs:SiteService
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty airs:hasServiceGroup ;
+                               owl:someValuesFrom airs:ServiceGroup
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty dct:description ;
+                               owl:allValuesFrom xsd:string
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty airs:hasStatus ;
+                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty airs:hasResourceInfo ;
+                               owl:allValuesFrom airs:ResourceInfo
+                             ] ;
+             
+             rdfs:comment "Akin to a \"Program\", as in for example \"a homeless outreach program\".  Can be delivered at many \"airs:Site[s]\", and the nexus of the two is an airs:SiteService"@en .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#ServiceArea
+
+airs:ServiceArea rdf:type owl:Class ;
+                 
+                 rdfs:subClassOf owl:Thing ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty airs:servesGeographicArea ;
+                                   owl:allValuesFrom dct:Location
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty airs:isInCensusTract ;
+                                   owl:allValuesFrom xsd:string
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty dct:description ;
+                                   owl:allValuesFrom xsd:string
+                                 ] ;
+                 
+                 rdfs:comment "This is the geographic area served by the SiteService. This can be anything from a single neighborhood to an entire country. Types can also be mixed; perhaps one city and 6 nearby ZIP codes. In this case the required element would be City and there would be additional ZIP codes. A national 1-800 hotline would have one Country element."@en .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#ServiceGroup
+
+airs:ServiceGroup rdf:type owl:Class ;
+                  
+                  rdfs:subClassOf owl:Thing ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty airs:offersService ;
+                                    owl:allValuesFrom airs:Service
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty dct:title ;
+                                    owl:allValuesFrom xsd:string
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty airs:hasResourceInfo ;
+                                    owl:allValuesFrom airs:ResourceInfo
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty dct:description ;
+                                    owl:allValuesFrom xsd:string
+                                  ] ;
+                  
+                  rdfs:comment "Groups together multiple Services that are related somehow."@en .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#Site
+
+airs:Site rdf:type owl:Class ;
+          
+          rdfs:subClassOf org:Site ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty vcard:hasRelated ;
+                            owl:allValuesFrom vcard:Contact
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty airs:hasAgency ;
+                            owl:cardinality "1"^^xsd:nonNegativeInteger
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty airs:excludesFromWebsite ;
+                            owl:allValuesFrom xsd:boolean
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty dct:description ;
+                            owl:allValuesFrom xsd:string
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty airs:hasTransportationServiceAccess ;
+                            owl:allValuesFrom xsd:string
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty airs:hasAlternateName ;
+                            owl:allValuesFrom airs:AlternateName
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty airs:hasInternetResource ;
+                            owl:allValuesFrom airs:InternetResource
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty airs:hasAgency ;
+                            owl:allValuesFrom airs:Agency
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty airs:hasDirections ;
+                            owl:allValuesFrom xsd:string
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty airs:isLocatedAtCrossStreet ;
+                            owl:allValuesFrom xsd:string
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty airs:hasDisabilitiesAccess ;
+                            owl:allValuesFrom xsd:string
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty airs:hasAddress ;
+                            owl:allValuesFrom airs:Address
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty airs:opensAtTimes ;
+                            owl:allValuesFrom airs:OpenHours
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty airs:hasStatus ;
+                            owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty airs:hasSpatialLocation ;
+                            owl:allValuesFrom <http://www.opengis.net/rdf#:Point>
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty airs:hasSiteService ;
+                            owl:allValuesFrom airs:SiteService
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty dct:title ;
+                            owl:allValuesFrom xsd:string
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty vcard:url ;
+                            owl:allValuesFrom xsd:string
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty vcard:hasTelephone ;
+                            owl:allValuesFrom vcard:TelephoneType
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty airs:hasResourceInfo ;
+                            owl:allValuesFrom airs:ResourceInfo
+                          ] ;
+          
+          rdfs:comment "Sites are physical locations or none physical locations (a website or hotline). Site is used for two purposes. First, it is used by Agency to provide the location of the agency in Agency.AgencyLocation (note this type of Site would never have any SiteService children). Second, sites are also the location where services are provided. This would be the Agency.Site element (note this type of Site would have SiteService children)."@en .
+[ rdf:type owl:Axiom ;
+  rdfs:comment "Directions are instructions to reach the Site's location."@en ;
+  owl:annotatedProperty rdfs:subClassOf ;
+  owl:annotatedSource airs:Site ;
+  owl:annotatedTarget [ rdf:type owl:Restriction ;
+                        owl:onProperty airs:hasDirections ;
+                        owl:allValuesFrom xsd:string
+                      ]
+] .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#SiteService
+
+airs:SiteService rdf:type owl:Class ;
+                 
+                 rdfs:subClassOf owl:Thing ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty airs:hasResourceInfo ;
+                                   owl:allValuesFrom airs:ResourceInfo
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty dct:description ;
+                                   owl:allValuesFrom xsd:string
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty airs:offersService ;
+                                   owl:allValuesFrom airs:Service
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty vcard:hasRelated ;
+                                   owl:allValuesFrom vcard:Contact
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty airs:hasSite ;
+                                   owl:allValuesFrom airs:Site
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty airs:hasStatus ;
+                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty airs:isNotAlwaysAvailable ;
+                                   owl:allValuesFrom xsd:boolean
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty airs:hasSeasonalSchedule ;
+                                   owl:allValuesFrom airs:Seasonal
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty airs:structuresFees ;
+                                   owl:allValuesFrom xsd:string
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty airs:servesGeographicArea ;
+                                   owl:allValuesFrom airs:ServiceArea
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty vcard:hasTelephone ;
+                                   owl:allValuesFrom vcard:TelephoneType
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty airs:hasTaxonomyCode ;
+                                   owl:allValuesFrom xsd:string
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty airs:hasLanguageAvailability ;
+                                   owl:allValuesFrom airs:LanguageAvailability
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty airs:requiresDocument ;
+                                   owl:allValuesFrom airs:Document
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty airs:hasApplicationProcess ;
+                                   owl:allValuesFrom airs:ApplicationProcess
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty airs:acceptsPaymentMethod ;
+                                   owl:allValuesFrom xsd:string
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty airs:requiresGeneralEligibility ;
+                                   owl:allValuesFrom xsd:string
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty dct:title ;
+                                   owl:allValuesFrom xsd:string
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty airs:hasGenderRequirement ;
+                                   owl:allValuesFrom airs:GenderRequirement
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty airs:hasInternetResource ;
+                                   owl:allValuesFrom airs:InternetResource
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty airs:opensAtTimes ;
+                                   owl:allValuesFrom airs:OpenHours
+                                 ] ;
+                 
+                 rdfs:comment "SiteService is the smallest unit describing a \"service\" that is offered at a Site. It can be thought of as the intersection of a Site and a Taxonomy code (or related Taxonomy codes) and meta data about what is offered. A \"Service\" however is not represented as its own element because the \"Service\" cannot exist without a location (the site)."@en .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://rdf.muninn-project.org/ontologies/organization#GenderStrict-M
+
+<http://rdf.muninn-project.org/ontologies/organization#GenderStrict-M> rdf:type owl:NamedIndividual .
+
+
+
+###  http://www.semanticdesktop.org/ontologies/2007/04/02/ncal#Calendar_1
+
+ncal:Calendar_1 rdf:type owl:NamedIndividual .
+
+
+
+###  http://www.semanticdesktop.org/ontologies/2007/04/02/ncal#Calendar_2
+
+ncal:Calendar_2 rdf:type owl:NamedIndividual .
+
+
+
+###  http://www.semanticdesktop.org/ontologies/2007/04/02/ncal#Event_3
+
+ncal:Event_3 rdf:type owl:NamedIndividual .
+
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#Location_1
+
+:Location_1 rdf:type owl:NamedIndividual .
+
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#ResourceInfo_1
+
+:ResourceInfo_1 rdf:type owl:NamedIndividual .
+
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#ResourceInfo_2
+
+:ResourceInfo_2 rdf:type owl:NamedIndividual .
+
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#ServiceArea_1
+
+:ServiceArea_1 rdf:type owl:NamedIndividual .
+
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#ServiceGroup_1
+
+:ServiceGroup_1 rdf:type owl:NamedIndividual .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#Address_1
+
+airs:Address_1 rdf:type owl:NamedIndividual ,
+                        airs:Address ;
+               
+               vcard:postal-code "30008"^^xsd:string ;
+               
+               vcard:street-address "331 Main Street"^^xsd:string ;
+               
+               airs:isMailingAddress "true"^^xsd:boolean ;
+               
+               airs:isPhysicalAddress "true"^^xsd:boolean ;
+               
+               vcard:region "Georgia"@en ;
+               
+               vcard:locality "Marietta"@en ;
+               
+               dct:description "This is the main address for this agency."@en ;
+               
+               vcard:country-name "United States of America"@en ;
+               
+               dct:description "Esta es la dirección principal de esta agencia."@es ;
+               
+               airs:hasResourceInfo :ResourceInfo_1 .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#Agency_1
+
+airs:Agency_1 rdf:type owl:NamedIndividual ,
+                       airs:Agency ;
+              
+              airs:hasFEIN "12345"^^xsd:string ;
+              
+              airs:hasYearIncorporated "1970"^^xsd:gYear ;
+              
+              airs:hasRecordOwner "Jim Smith"^^xsd:string ;
+              
+              airs:hasStatus "active"^^xsd:string ;
+              
+              vcard:url "http://community_clinic.com"^^xsd:string ;
+              
+              airs:hasLegalStatus "incorporated 501c3"^^xsd:string ;
+              
+              airs:excludesFromWebsite "true"^^xsd:boolean ;
+              
+              vcard:organization-name "The Community Clinic"@en ;
+              
+              dct:description "The community clinic provides basic health care for members of the community."@en ;
+              
+              airs:hasResourceInfo :ResourceInfo_1 ;
+              
+              airs:hasServiceGroup :ServiceGroup_1 ;
+              
+              vcard:hasTelephone :Voice_1 ;
+              
+              vcard:hasRelated vcard:Contact_1 ;
+              
+              airs:hasAlternateName airs:AlternateName_1 ;
+              
+              airs:hasInternetResource airs:InternetResource_1 ;
+              
+              airs:hasLicenseAccreditation airs:LicenseAccreditation_1 ;
+              
+              airs:offersService airs:Service_1 ;
+              
+              org:hasSite airs:Site_1 .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#AlternateName_1
+
+airs:AlternateName_1 rdf:type owl:NamedIndividual ,
+                              airs:AlternateName ;
+                     
+                     dct:title "Clinic by the Bridge"^^xsd:string ;
+                     
+                     dct:description "The locals call it this."^^xsd:string ;
+                     
+                     airs:isConfidential "false"^^xsd:boolean .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#ApplicationProcess_1
+
+airs:ApplicationProcess_1 rdf:type owl:NamedIndividual ,
+                                   airs:ApplicationProcess ;
+                          
+                          dct:description "The prospective enrollee must have their income verified."@en ;
+                          
+                          dct:title "income verification"@en .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#Document_1
+
+airs:Document_1 rdf:type owl:NamedIndividual ,
+                         airs:Document ;
+                
+                dct:description "A valid State of Georgia Driver's License."@en ;
+                
+                dct:title "driver's license"@en .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#GenderRequirement_1
+
+airs:GenderRequirement_1 rdf:type owl:NamedIndividual ,
+                                  airs:GenderRequirement ;
+                         
+                         airs:requiresMinimumAge "0"^^xsd:nonNegativeInteger ;
+                         
+                         airs:requiresGender <http://rdf.muninn-project.org/ontologies/organization#GenderStrict-M> .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#InternetResource_1
+
+airs:InternetResource_1 rdf:type owl:NamedIndividual ,
+                                 airs:InternetResource ;
+                        
+                        dct:description "A facebook page that the clinic keeps to maintain a social media presence."^^xsd:string ;
+                        
+                        vcard:url "http://facebook.com/community_clinic"^^xsd:string .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#InternetResource_2
+
+airs:InternetResource_2 rdf:type owl:NamedIndividual ,
+                                 airs:InternetResource ;
+                        
+                        dct:description "A twitter page that the clinic keeps to maintain a social media presence."^^xsd:string ;
+                        
+                        vcard:url "http://twitter.com/community_clinic"^^xsd:string .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#LanguageAvailability_1
+
+airs:LanguageAvailability_1 rdf:type owl:NamedIndividual ,
+                                     airs:LanguageAvailability ;
+                            
+                            dct:description "A native French speaker is often available at this location."@en ;
+                            
+                            dc:language "French"@en ;
+                            
+                            airs:hasLanguageTimeOpen ncal:Calendar_1 .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#LicenseAccreditation_1
+
+airs:LicenseAccreditation_1 rdf:type owl:NamedIndividual ,
+                                     airs:LicenseAccreditation ;
+                            
+                            dct:title "AIRS Resource Specialist Accreditation"^^xsd:string ;
+                            
+                            airs:isLicensedBy "Alliance of Information and Referral Services (AIRS)"^^xsd:string .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#OpenHours_1
+
+airs:OpenHours_1 rdf:type owl:NamedIndividual ,
+                          airs:OpenHours ;
+                 
+                 dct:description "This program is open every weekday."@en ;
+                 
+                 airs:opensAtTimes ncal:Calendar_2 .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#ResourceInfo_1
+
+airs:ResourceInfo_1 rdf:type owl:NamedIndividual ,
+                             airs:ResourceInfo ;
+                    
+                    dct:created "2014-06-01T00:00:00.0Z"^^xsd:dateTime ;
+                    
+                    airs:hasDateLastVerified "2014-06-03T18:13:51.0Z"^^xsd:dateTime ;
+                    
+                    airs:hasDateOfLastAction "2014-06-07T00:00:00.0Z"^^xsd:dateTime ;
+                    
+                    airs:isAvailableForDirectory "true"^^xsd:boolean ;
+                    
+                    airs:isAvailableForResearch "true"^^xsd:boolean ;
+                    
+                    airs:isAvailableForReferral "true"^^xsd:boolean ;
+                    
+                    airs:hasLastActionType "updated ZIP Code"^^xsd:string .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#ResourceInfo_2
+
+airs:ResourceInfo_2 rdf:type owl:NamedIndividual ,
+                             airs:ResourceInfo ;
+                    
+                    dct:created "2014-06-01T00:00:00.0Z"^^xsd:dateTime ;
+                    
+                    airs:hasDateLastVerified "2014-06-03T18:13:51.0Z"^^xsd:dateTime ;
+                    
+                    airs:hasDateOfLastAction "2014-06-07T00:00:00.0Z"^^xsd:dateTime ;
+                    
+                    airs:isAvailableForResearch "true"^^xsd:boolean ;
+                    
+                    airs:isAvailableForDirectory "true"^^xsd:boolean ;
+                    
+                    airs:isAvailableForReferral "true"^^xsd:boolean ;
+                    
+                    airs:hasLastActionType "updated ZIP Code"^^xsd:string .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#ResourceInfo_3
+
+airs:ResourceInfo_3 rdf:type owl:NamedIndividual ,
+                             airs:ResourceInfo ;
+                    
+                    dct:created "2014-06-01T00:00:00.0Z"^^xsd:dateTime ;
+                    
+                    airs:hasDateLastVerified "2014-06-03T18:13:51.0Z"^^xsd:dateTime ;
+                    
+                    airs:hasDateOfLastAction "2014-06-07T00:00:00.0Z"^^xsd:dateTime ;
+                    
+                    airs:isAvailableForResearch "true"^^xsd:boolean ;
+                    
+                    airs:isAvailableForDirectory "true"^^xsd:boolean ;
+                    
+                    airs:isAvailableForReferral "true"^^xsd:boolean ;
+                    
+                    airs:hasLastActionType "updated ZIP Code"^^xsd:string .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#Seasonal_1
+
+airs:Seasonal_1 rdf:type owl:NamedIndividual ,
+                         airs:Seasonal ;
+                
+                airs:isSeasonal "true"^^xsd:boolean ;
+                
+                dct:description "This program is available only during the month of June."@en ;
+                
+                airs:hasSeasonalSchedule ncal:Event_3 .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#ServiceArea_1
+
+airs:ServiceArea_1 rdf:type owl:NamedIndividual ,
+                            airs:ServiceArea ;
+                   
+                   airs:isInCensusTract "12345"^^xsd:string ;
+                   
+                   airs:servesGeographicArea :Location_1 .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#ServiceGroup_1
+
+airs:ServiceGroup_1 rdf:type owl:NamedIndividual ,
+                             airs:ServiceGroup .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#Service_1
+
+airs:Service_1 rdf:type owl:NamedIndividual ,
+                        airs:Service ;
+               
+               dct:description "Marrietta Regional Community Clinics"^^xsd:string ;
+               
+               airs:hasServiceGroup :ServiceGroup_1 ;
+               
+               airs:hasAgency airs:Agency_1 .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#SiteService_1
+
+airs:SiteService_1 rdf:type owl:NamedIndividual ,
+                            airs:SiteService ;
+                   
+                   airs:isInCensusTract "3452"^^xsd:string ;
+                   
+                   airs:hasTaxonomyCode "AB-123"^^xsd:string ,
+                                        "CD-345"^^xsd:string ;
+                   
+                   airs:acceptsPaymentMethod "Medicaid"^^xsd:string ;
+                   
+                   airs:hasStatus "active"^^xsd:string ;
+                   
+                   airs:isNotAlwaysAvailable "false"^^xsd:boolean ;
+                   
+                   airs:requiresFamily "Family is encouraged to enroll."@en ;
+                   
+                   airs:requiresResidency "Must be a resident of Marietta."@en ;
+                   
+                   airs:requiresIncome "Must be at 150% of poverty level."@en ;
+                   
+                   airs:requiresGeneralEligibility "Must be receiving Medicaid."@en ;
+                   
+                   dct:title "The Community Clinic Main Street Annex"@en ;
+                   
+                   dct:description "This is a new service location on Main Street."@en ;
+                   
+                   airs:hasResourceInfo :ResourceInfo_2 ;
+                   
+                   airs:servesGeographicArea :ServiceArea_1 ;
+                   
+                   vcard:hasTelephone :Voice_2 ;
+                   
+                   airs:hasAddress airs:Address_1 ;
+                   
+                   airs:hasApplicationProcess airs:ApplicationProcess_1 ;
+                   
+                   airs:requiresDocument airs:Document_1 ;
+                   
+                   airs:hasGenderRequirement airs:GenderRequirement_1 ;
+                   
+                   airs:hasInternetResource airs:InternetResource_2 ;
+                   
+                   airs:hasLanguageAvailability airs:LanguageAvailability_1 ;
+                   
+                   airs:offersService airs:Service_1 ;
+                   
+                   airs:hasSite airs:Site_1 .
+
+
+
+###  https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#Site_1
+
+airs:Site_1 rdf:type owl:NamedIndividual ,
+                     airs:Site ;
+            
+            airs:hasStatus "active"^^xsd:string ;
+            
+            org:siteOf airs:Agency_1 .
+
+
+
+
+###  Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net
+
