@@ -874,7 +874,6 @@ org:Site rdf:type owl:Class .
 airs:Address rdf:type owl:Class ;
              
              rdfs:subClassOf vcard:Address ,
-                             airs:Address ,
                              [ rdf:type owl:Restriction ;
                                owl:onProperty dct:description ;
                                owl:allValuesFrom xsd:string
