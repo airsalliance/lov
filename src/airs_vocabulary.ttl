@@ -14,13 +14,13 @@
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 
 <https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#> a owl:Ontology ;
-	owl:versionIRI <https://raw.githubusercontent.com/airs-linked-data/lov/v4.0.0-alpha.3/src/airs_vocabulary.ttl#> ;
+	owl:versionIRI <https://raw.githubusercontent.com/airs-linked-data/lov/v4.0.0/src/airs_vocabulary.ttl#> ;
 	owl:priorVersion <https://raw.githubusercontent.com/airs-linked-data/lov/v0.0.11/src/airs_vocabulary.ttl#> ;
 	dct:license <https://creativecommons.org/publicdomain/zero/1.0/> ;
 	owl:backwardCompatibleWith "" ;
-	dc:title "The Alliance of Information and Referral Services (AIRS) Linked Open Vocabulary"^^xsd:string ;
+	dc:title "The Alliance of Information and Referral Systems (AIRS) Linked Open Vocabulary"^^xsd:string ;
 	dct:created "2016-03-01" ;
-	owl:versionInfo "The AIRS Linked Open Vocabulary is a way to describe human services information and referral (I&R) concepts.  AIRS is the Alliance of Information and Referral Services (airs.org), which possesses over 1,000 member agencies primarily in the United States and Canada.  The AIRS LOV is based on the AIRS XML Schema, available at: https://github.com/airsalliance/airs-xml/blob/v4.0.0-alpha.3/src/airs.xsd"@en .
+	owl:versionInfo "The AIRS Linked Open Vocabulary is a way to describe human services information and referral (I&R) concepts.  AIRS is the Alliance of Information and Referral Systems (airs.org), which possesses over 1,000 member agencies primarily in the United States and Canada.  The AIRS LOV is based on the AIRS XML Schema, available at: https://github.com/airsalliance/airs-xml/blob/v4.0.0-alpha.3/src/airs.xsd"^^xsd:string .
 # 
 # 
 # #################################################################
