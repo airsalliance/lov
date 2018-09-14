@@ -892,6 +892,10 @@ airs:Service rdf:type owl:Class ;
                                owl:allValuesFrom airs:SiteService
                              ] ,
                              [ rdf:type owl:Restriction ;
+                               owl:onProperty airs:hasTaxonomy ;
+                               owl:allValuesFrom airs:Taxonomy
+                             ] ,
+                             [ rdf:type owl:Restriction ;
                                owl:onProperty dct:description ;
                                owl:allValuesFrom xsd:string
                              ] ,
